@@ -49,7 +49,7 @@ const AdmissionForm = () => {
 
     //if validation is successful then update the backend
     try {
-      const response = await fetch("http://localhost:3001/api/form/submit", {
+      const response = await fetch("https://pdf-form.onrender.com/api/form/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
