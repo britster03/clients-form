@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import jsPDF from "jspdf";
-import SuccessPage from "./SuccessPage";
 import formImagee from "./formImagee.jpg";
 
 const AdmissionForm = () => {
