@@ -1,4 +1,4 @@
-# Full Stack Form with PDF Generator
+# Full Stack Form with PDF Generator 📜
 
 ## Overview
 
@@ -90,4 +90,4 @@ Upon successful form submission, a PDF document is generated, and the user is al
 
 
 ## Contributing
-Feel free to contribute to the project by opening issues or submitting pull requests.
+Feel free to contribute to the project by opening issues or submitting pull requests. ✨
