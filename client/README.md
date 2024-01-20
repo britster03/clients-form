@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# Full Stack Form with PDF Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This is the front-end code for the Full Stack Form with PDF Generator. The form collects user information such as name, email, phone number, and an optional free text field. It also includes a checkbox for users to agree to the terms and services.
 
-In the project directory, you can run:
+## Tech Stack 
+React.js
+Tailwind CSS
+Node.js
+Express.js
+Supabase
+PostgreSQL
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Form Structure](#form-structure)
+4. [Functions](#functions)
+5. [Connectivity with Backend](#connectivity-with-backend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash git clone <repository-url>```
+2. Change directory to the client folder:
+    cd client
 
-### `npm run build`
+3. Install dependencies:
+    npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```npm start```
 
-### `npm run eject`
+Visit http://localhost:3000 in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Form Structure
+The form is built using React and Tailwind CSS. It is designed to be simple and user-friendly.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`Name`: Text input for the user's full name.
+`Email Address`: Text input for the user's email address.
+`Phone Number`: Text input for the user's phone number.
+`Free Text Field (optional)`: A textarea for any additional information the user wants to provide.
+`Terms and Service Checkbox`: A checkbox for the user to agree to the terms and services.
+`Submit Button`: Clicking this button triggers the form submission.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Functions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`handleInputChange`: Updates the form state when input fields change.
 
-## Learn More
+`handleSubmit`: Handles the form submission. Performs client-side validation, and if successful, sends a POST request to the backend.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`generatePDF`: Generates a PDF document with the form data.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`useEffect`: Invokes the printing function and PDF generation after a successful form submission.
 
-### Code Splitting
+### Connectivity with Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The form connects to the backend using a POST request to the `/api/form/submit` endpoint. 
+The backend API handles the storage or processing of the form data. Any errors during submission are displayed to the user.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Endpoint
 
-### Making a Progressive Web App
+The form submits data to the backend API endpoint:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```plaintext POST https://pdf-form.onrender.com/api/form/submit ```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Backend Integration
+The form communicates with the backend to store admission form data. The backend, is available at 
+`https://pdf-form.onrender.com/api/form/submit`, it handles the storage of form data and return appropriate responses.
 
-### Deployment
+The backend has corresponding endpoints for handling form submissions and potentially storing data in a database. The specific implementation of these endpoints depends on the usage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Tailwind CSS is used for styling the form, providing a clean and responsive user interface. You can customize the styles by modifying the Tailwind CSS classes in the JSX code.
+
+## Additional Notes
+
+This form includes client-side validation to ensure that required fields are filled, and age falls within a valid range.
+Upon successful form submission, a PDF document is generated, and the user is alerted about the successful submission.
+
+
+## Contributing
+Feel free to contribute to the project by opening issues or submitting pull requests.
