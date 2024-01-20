@@ -3,6 +3,9 @@ import { useReactToPrint } from "react-to-print";
 import jsPDF from "jspdf";
 import formImagee from "./formImagee.jpg";
 
+//2 methods to generate pdf, using jsPDF and react-to-print
+//jsPDF automatically generates pdf on submission and react-to-print gives option to print as well as save the form in exam manner as pdf , just like Google Forms
+
 const AdmissionForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,15 +14,17 @@ const AdmissionForm = () => {
     freetextfield: "",
   });
 
+  const [error, setError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [countryCodes, setCountryCodes] = useState([]);
   const componentRef = useRef();
 
+  //save as pdf, i.e react-to-print library function
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
-  const [error, setError] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -34,13 +39,13 @@ const AdmissionForm = () => {
       setError("All fields are required");
       return;
     }
-    // Simple email validation
+    // email validation
     if (!isValidEmail(formData.email)) {
       setError("Please enter a valid email address");
       return;
     }
 
-    // Simple phone number validation (assuming a 10-digit format)
+    // phone number validation
     if (!isValidPhoneNumber(formData.phonenumber)) {
       setError("Please enter a valid 10-digit phone number");
       return;
@@ -72,6 +77,7 @@ const AdmissionForm = () => {
     }
   };
 
+  //generate pdf automtically after submission with required info from form
   const generatePDF = () => {
     const pdf = new jsPDF();
     pdf.text(20, 20, `Name: ${formData.name}`);
@@ -82,7 +88,7 @@ const AdmissionForm = () => {
   };
 
   const isValidEmail = (email) => {
-    // Simple email validation
+    // validation logic email
     const emailParts = email.split("@");
     return (
       emailParts.length === 2 && emailParts[0] && emailParts[1].includes(".")
@@ -90,18 +96,20 @@ const AdmissionForm = () => {
   };
 
   const isValidPhoneNumber = (phoneNumber) => {
-    // Simple phone number validation (assuming a 10-digit format)
+    // validation logic phn number
     return phoneNumber.length === 10 && !isNaN(phoneNumber);
   };
   useEffect(() => {
     if (submitted) {
-      // Trigger print after form submission
+      // triggers after submission
       handlePrint();
       generatePDF();
     }
   }, [submitted, handlePrint]);
 
-    const [countryCodes, setCountryCodes] = useState([]);
+
+  //an addition to the UI , where we can choose the country code while entering phone number
+  //used a public api to fetch the country codes
 
   useEffect(() => {
     fetchCountryCodes();
@@ -125,12 +133,15 @@ const AdmissionForm = () => {
     }
   };
 
+  //end of functions
+
 return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-white">
       <div className="w-full lg:w-1/2 flex">
-        {/* Left side: Image */}
+
+      {/* ui for form is divided in 2 forms, on left we have image and on right side we have input fields, designed using tailwind css */}
+        
         <div className="w-full relative">
-          {/* Adjust the image source and alt text accordingly */}
           <img
             src={formImagee}
             alt="Your Image Alt Text"
@@ -138,7 +149,7 @@ return (
           />
         </div>
 
-        {/* Right side: Form */}
+        {/* input fiedls */}
         <div className="w-full p-8 bg-white rounded-r-lg" ref={componentRef}>
           <h2 className="text-3xl font-bold mb-2 text-center">
             Admission Form
@@ -236,7 +247,7 @@ return (
           >
             Submit
           </button>
-
+              {/* in case the form fails to submit, below will show an error */}
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
       </div>
